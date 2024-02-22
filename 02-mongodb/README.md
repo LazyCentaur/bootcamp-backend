@@ -33,25 +33,11 @@ Habría que ver también qué cantidad de alojamientos podrían llegar a haber e
 
 ```js
 use('airbnb')
-db.listingsAndReviews.aggregate([
-    { 
-        $match: { "address.country": "Spain" }
-    },
+db.listingsAndReviews.find(
     {
-        $group: {
-            _id: "$address.country",
-            count: { $sum: 1 }
-        }
+        "address.country": "Spain"
     }
-])
-```
-```js
-[
-  {
-    "_id": "Spain",
-    "count": 633
-  }
-]
+).count()
 ```
 
 - Lista los 10 primeros:
@@ -60,25 +46,18 @@ db.listingsAndReviews.aggregate([
 
 ```js
 use('airbnb')
-db.listingsAndReviews.aggregate([
+db.listingsAndReviews.find(
     {
-        $project: {
-            _id: 0,
-            name: 1,
-            price: 1,
-            beds: 1,
-            'address.market': 1
-        }
+        "address.country": "Spain"
     },
     {
-        $sort: {
-            price: 1,
-        }
-    },
-    {
-        $limit: 10
+        _id: 0,
+        name: 1,
+        price: 1,
+        beds: 1,
+        'address.market': 1 
     }
-])
+).sort({price: 1}).limit(10)
 ```
 ### Filtrando
 
@@ -155,9 +134,6 @@ db.listingsAndReviews.find(
 use('airbnb')
 db.listingsAndReviews.find(
     {
-        beds: { $eq: 4 },
-        bathrooms: { $gte: 2 },
-        amenities: { $all: ["Wifi", "Pets allowed"] },
         price: { $lte: 50 },
         "review_scores.review_scores_rating": { $gte: 88 },
         $or: [
@@ -184,9 +160,6 @@ db.listingsAndReviews.find(
 use('airbnb')
 db.listingsAndReviews.find(
     {
-        beds: { $eq: 4 },
-        bathrooms: { $gte: 2 },
-        amenities: { $all: ["Wifi", "Pets allowed"] },
         price: { $lte: 50 },
         "review_scores.review_scores_rating": { $gte: 88 },
         "host.host_is_superhost": true,
