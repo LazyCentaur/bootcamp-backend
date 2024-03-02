@@ -1,0 +1,35 @@
+{
+  "name": "02-playground-typescript",
+  "version": "1.0.0",
+  "description": "Playground to show code snippets via TypeScript",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon --quiet --watch ./src --ext ts --exec node --experimental-specifier-resolution=node --loader=ts-node/esm --no-warnings ./src/index.ts"
+  },
+  "keywords": [
+    "lemoncode",
+    "bootcamp",
+    "nodejs",
+    "javascript"
+  ],
+  "license": "MIT",
+  "author": "Lemoncode",
+  "contributors": [
+    "Javier Calzado <javi.calzado@lemoncode.net> (https://github.com/fjcalzado)",
+    "Santiago Camargo <santi.camargo@lemoncode.net> (https://github.com/crsanti)"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://Lemoncode/bootcamp-backend.git"
+  },
+  "homepage": "https://github.com/Lemoncode/bootcamp-backend#readme",
+  "bugs": {
+    "url": "https://github.com/Lemoncode/bootcamp-backend/issues"
+  },
+  "devDependencies": {
+    "@types/node": "^18.16.19",
+    "nodemon": "^2.0.22",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  }
+}
